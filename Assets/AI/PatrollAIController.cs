@@ -9,8 +9,7 @@ public class PatrollAIController : MonoBehaviour
 {
     private NavMeshAgent _agent;
     private IPathPointHandler _pathPointHandler;
-    private Vector3 _currentDestination;
-    
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -24,8 +23,7 @@ public class PatrollAIController : MonoBehaviour
 
     private void GoToNextPoint()
     {
-        _currentDestination = _pathPointHandler.GetNextPoint();
-        _agent.SetDestination(_currentDestination);
+        _agent.SetDestination(_pathPointHandler.GetNextPoint());
     }
 
     private void Update()
