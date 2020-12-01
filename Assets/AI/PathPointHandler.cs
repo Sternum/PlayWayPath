@@ -6,21 +6,23 @@ using UnityEngine;
 
 public class PathPointHandler : MonoBehaviour, IPathPointHandler
 {
-    private List<IPathPoint> _pathPoints;
-    private int _currentPoint = 0;
-
-    private void Awake()
-    {
-        _pathPoints = new List<IPathPoint>(FindObjectsOfType<PathPoint>().ToList());
-    }
+    [SerializeField]
+    private List<PathPoint> _pathPoints;
+    private int _currentPointIndex = 0;
 
     public Vector3 GetNextPoint()
     {
-        IPathPoint point = _pathPoints[_currentPoint++];
-        if (_currentPoint >= _pathPoints.Count)
+        IPathPoint point = _pathPoints[_currentPointIndex++];
+        if (_currentPointIndex >= _pathPoints.Count)
         {
-            _currentPoint = 0;
+            _currentPointIndex = 0;
         }
+
         return point.GetPoint();
+    }
+
+    public int PathCount()
+    {
+        return _pathPoints.Count;
     }
 }

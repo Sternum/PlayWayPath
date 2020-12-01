@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
+
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class PatrollAIController : MonoBehaviour
 {
     private NavMeshAgent _agent;
     private IPathPointHandler _pathPointHandler;
-
+    
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _pathPointHandler = GetComponent<IPathPointHandler>();
+        enabled = _pathPointHandler.PathCount() > 0 ?  true : false;
     }
 
     private void Start()
     {
-        GoToNextPoint();
+        if (enabled)
+        {
+            GoToNextPoint();
+        }
     }
 
     private void GoToNextPoint()
