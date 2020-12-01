@@ -13,6 +13,12 @@ public class PatrollAIController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _pathPointHandler = GetComponent<IPathPointHandler>();
         enabled = _pathPointHandler.PathCount() > 0 ?  true : false;
+        _pathPointHandler.OnPointAdd += OnPointAdd;
+    }
+
+    private void OnPointAdd()
+    {
+        enabled = true;
     }
 
     private void Start()
